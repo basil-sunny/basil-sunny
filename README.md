@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Basil Sunny</h1>
-<h3 align="center">DevOps |Everything as Code</h3>
+<h3 align="center">DevOps | Everything as Code</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=basil-sunny&label=Profile%20views&color=0e75b6&style=flat" alt="basil-sunny" /> </p>
 
