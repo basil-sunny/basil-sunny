@@ -3,8 +3,6 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=basil-sunny&label=Profile%20views&color=0e75b6&style=flat" alt="basil-sunny" /> </p>
 
-<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=basil-sunny" alt="basil-sunny" /></a> </p>
-
 - 🌱 I’m currently learning **Go**
 
 - 💬 Ask me about **CI/CD, Kubernetes, AWS, Infrastructure as Code**
