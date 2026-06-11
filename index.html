@@ -3,454 +3,319 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Basil Sunny | Senior DevOps Engineer</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+<title>Basil Sunny — Senior DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:'Inter',sans-serif;
-    background:#f7f9fc;
-    color:#1f2937;
+  :root{
+    --bg:#0c1015;
+    --bg-2:#11161d;
+    --panel:#151b24;
+    --line:#222b36;
+    --line-2:#2c3744;
+    --txt:#e6edf3;
+    --txt-dim:#8b97a5;
+    --txt-faint:#5d6776;
+    --signal:#3ee07f;
+    --signal-dim:#1f7d4a;
+    --amber:#f5c451;
+    --radius:6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--txt);
+    font-family:'Space Grotesk',system-ui,sans-serif;
     line-height:1.6;
-}
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:48px 48px;opacity:.18;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%);
+  }
+  .mono{font-family:'JetBrains Mono',monospace}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
 
-.container{
-    width:90%;
-    max-width:1200px;
-    margin:auto;
-}
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+    background:rgba(12,16,21,.78);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:15px;letter-spacing:.5px}
+  .brand .dot{color:var(--signal)}
+  .nav-links{display:flex;gap:30px;font-size:14px;font-family:'JetBrains Mono',monospace}
+  .nav-links a{color:var(--txt-dim);transition:color .2s}
+  .nav-links a:hover{color:var(--signal)}
+  .menu-btn{display:none;background:none;border:none;color:var(--txt);font-size:22px;cursor:pointer}
 
-header{
-    background:white;
-    padding:20px 0;
-    box-shadow:0 1px 4px rgba(0,0,0,.05);
-}
+  /* HERO */
+  header{padding:78px 0 56px}
+  .status-line{display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;color:var(--txt-dim);border:1px solid var(--line-2);border-radius:100px;
+    padding:6px 14px;margin-bottom:30px;background:var(--bg-2)}
+  .pulse{width:8px;height:8px;border-radius:50%;background:var(--signal);
+    box-shadow:0 0 0 0 rgba(62,224,127,.55);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(62,224,127,.5)}70%{box-shadow:0 0 0 9px rgba(62,224,127,0)}100%{box-shadow:0 0 0 0 rgba(62,224,127,0)}}
+  .hero-grid{display:grid;grid-template-columns:1fr 320px;gap:54px;align-items:center}
+  h1{font-size:clamp(40px,6.4vw,72px);font-weight:700;line-height:1.02;letter-spacing:-1.5px;margin-bottom:18px}
+  .role{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--signal);margin-bottom:22px;letter-spacing:.3px}
+  .role span{color:var(--txt-faint)}
+  .lede{font-size:17.5px;color:var(--txt-dim);max-width:520px;margin-bottom:34px;line-height:1.65}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;padding:13px 22px;
+    border-radius:var(--radius);border:1px solid var(--line-2);transition:all .2s;cursor:pointer;display:inline-flex;align-items:center;gap:9px}
+  .btn-primary{background:var(--signal);color:#06140c;border-color:var(--signal);font-weight:600}
+  .btn-primary:hover{background:#5af094;box-shadow:0 0 24px rgba(62,224,127,.35);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--txt)}
+  .btn-ghost:hover{border-color:var(--signal);color:var(--signal);transform:translateY(-2px)}
 
-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+  /* AVATAR PANEL */
+  .id-card{background:var(--panel);border:1px solid var(--line-2);border-radius:10px;overflow:hidden}
+  .id-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--bg-2)}
+  .id-bar .d{width:11px;height:11px;border-radius:50%;background:var(--line-2)}
+  .id-bar .d:nth-child(1){background:#ec6a5e}.id-bar .d:nth-child(2){background:#f5bf4f}.id-bar .d:nth-child(3){background:var(--signal)}
+  .id-bar small{margin-left:6px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--txt-faint)}
+  .id-body{padding:24px;text-align:center}
+  .avatar{width:108px;height:108px;border-radius:50%;margin:0 auto 16px;object-fit:cover;
+    border:2px solid var(--signal-dim);background:var(--bg-2)}
+  .id-body .name{font-weight:600;font-size:18px}
+  .id-body .tag{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--txt-dim);margin-top:3px}
+  .id-meta{margin-top:18px;border-top:1px solid var(--line);padding-top:16px;font-family:'JetBrains Mono',monospace;font-size:12px;text-align:left;display:grid;gap:9px}
+  .id-meta div{display:flex;justify-content:space-between;color:var(--txt-faint)}
+  .id-meta b{color:var(--txt);font-weight:500}
 
-.logo{
-    font-size:28px;
-    font-weight:800;
-    color:#2563eb;
-}
+  /* STATS */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:64px;
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+  .stat{padding:26px 22px;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:none}
+  .stat .n{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;color:var(--signal);letter-spacing:-1px}
+  .stat .l{font-size:13px;color:var(--txt-dim);margin-top:4px}
 
-.menu a{
-    text-decoration:none;
-    margin-left:25px;
-    color:#374151;
-    font-weight:500;
-}
+  /* SECTION */
+  section{padding:74px 0}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--signal);
+    letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--signal-dim)}
+  h2{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-1px;margin-bottom:38px}
 
-.hero{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:50px;
-    padding:80px 0;
-}
+  /* SKILLS */
+  .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .skill{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px;transition:all .25s}
+  .skill:hover{border-color:var(--signal-dim);transform:translateY(-3px)}
+  .skill h3{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;margin-bottom:12px;color:var(--txt)}
+  .skill h3::before{content:"› ";color:var(--signal)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--txt-dim);
+    background:var(--bg-2);border:1px solid var(--line);border-radius:5px;padding:4px 9px}
 
-.hero-text{
-    flex:1;
-}
+  /* CASE STUDIES */
+  .cases{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .case{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:26px;position:relative;transition:all .25s;overflow:hidden}
+  .case::after{content:"";position:absolute;left:0;top:0;height:100%;width:3px;background:var(--signal);transform:scaleY(0);transform-origin:top;transition:transform .3s}
+  .case:hover{border-color:var(--line-2);transform:translateY(-3px)}
+  .case:hover::after{transform:scaleY(1)}
+  .case .idx{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--txt-faint);margin-bottom:14px}
+  .case h3{font-size:19px;font-weight:600;margin-bottom:10px}
+  .case p{font-size:14.5px;color:var(--txt-dim);line-height:1.6}
+  .case .stack{margin-top:16px;display:flex;gap:7px;flex-wrap:wrap}
+  .case .stack span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--signal);opacity:.8}
 
-.hero-text h1{
-    font-size:58px;
-    line-height:1.1;
-    margin-bottom:15px;
-}
+  /* SOLVED — terminal log */
+  .terminal{background:#0a0e13;border:1px solid var(--line-2);border-radius:10px;overflow:hidden}
+  .term-bar{display:flex;align-items:center;gap:7px;padding:11px 15px;border-bottom:1px solid var(--line);background:var(--bg-2)}
+  .term-bar .d{width:11px;height:11px;border-radius:50%}
+  .term-bar .d:nth-child(1){background:#ec6a5e}.term-bar .d:nth-child(2){background:#f5bf4f}.term-bar .d:nth-child(3){background:var(--signal)}
+  .term-bar small{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--txt-faint)}
+  .term-body{padding:22px 24px;font-family:'JetBrains Mono',monospace;font-size:14px}
+  .log{display:flex;gap:12px;padding:7px 0;color:var(--txt)}
+  .log .ok{color:var(--signal);flex-shrink:0}
+  .log .t{color:var(--txt-faint);flex-shrink:0}
+  .log .msg{color:var(--txt-dim)}
 
-.hero-text h2{
-    color:#2563eb;
-    font-size:26px;
-    margin-bottom:20px;
-}
+  /* CONTACT */
+  .contact{background:var(--panel);border:1px solid var(--line-2);border-radius:12px;padding:48px;text-align:center}
+  .contact h2{margin-bottom:14px}
+  .contact p{color:var(--txt-dim);max-width:520px;margin:0 auto 30px;font-size:16px}
+  .links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 
-.hero-text p{
-    color:#4b5563;
-    font-size:18px;
-    margin-bottom:30px;
-}
+  footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--txt-faint)}
 
-.btn{
-    display:inline-block;
-    padding:14px 24px;
-    background:#2563eb;
-    color:white;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:600;
-    margin-right:10px;
-}
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
 
-.btn-outline{
-    background:white;
-    color:#2563eb;
-    border:2px solid #2563eb;
-}
-
-.hero-image img{
-    width:280px;
-    border-radius:50%;
-    box-shadow:0 10px 40px rgba(0,0,0,.1);
-}
-
-.section{
-    padding:70px 0;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:40px;
-}
-
-.section-title h2{
-    font-size:36px;
-}
-
-.skills{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:20px;
-}
-
-.skill-card{
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,.05);
-}
-
-.skill-card h3{
-    margin-bottom:10px;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 2px 10px rgba(0,0,0,.05);
-}
-
-.card h3{
-    margin-bottom:15px;
-    color:#2563eb;
-}
-
-.card p{
-    color:#4b5563;
-}
-
-.achievement{
-    display:flex;
-    gap:15px;
-    margin-bottom:15px;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:20px;
-}
-
-.stat{
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    text-align:center;
-}
-
-.stat h3{
-    font-size:40px;
-    color:#2563eb;
-}
-
-footer{
-    background:#111827;
-    color:white;
-    text-align:center;
-    padding:30px;
-    margin-top:80px;
-}
-
-@media(max-width:900px){
-
-.hero{
-    flex-direction:column;
-    text-align:center;
-}
-
-.hero-text h1{
-    font-size:42px;
-}
-
-.hero-image img{
-    width:220px;
-}
-}
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr}
+    .id-card{max-width:340px;margin:0 auto}
+    .stats{grid-template-columns:1fr 1fr}
+    .stat:nth-child(2){border-right:none}.stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line)}
+    .skills{grid-template-columns:1fr 1fr}
+    .cases{grid-template-columns:1fr}
+    .nav-links{display:none}.menu-btn{display:block}
+    .nav-links.open{display:flex;position:absolute;top:62px;left:0;right:0;flex-direction:column;
+      background:var(--bg-2);border-bottom:1px solid var(--line);padding:18px 28px;gap:16px}
+  }
+  @media(max-width:480px){
+    .skills{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr 1fr}
+    .contact{padding:32px 22px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
-
 <body>
 
-<header>
-<div class="container">
 <nav>
-<div class="logo">basilsunny.com</div>
-
-<div class="menu">
-<a href="#">Home</a>
-<a href="#skills">Skills</a>
-<a href="#projects">Case Studies</a>
-<a href="#contact">Contact</a>
-</div>
+  <div class="wrap nav-in">
+    <a href="#" class="brand">basilsunny<span class="dot">.</span>com</a>
+    <div class="nav-links" id="navlinks">
+      <a href="#skills">skills</a>
+      <a href="#projects">case_studies</a>
+      <a href="#solved">solved</a>
+      <a href="#contact">contact</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">≡</button>
+  </div>
 </nav>
-</div>
+
+<header>
+  <div class="wrap">
+    <div class="status-line mono"><span class="pulse"></span> all systems operational · open to opportunities</div>
+    <div class="hero-grid">
+      <div>
+        <h1>Basil Sunny</h1>
+        <div class="role mono">Senior DevOps Engineer <span>//</span> AWS <span>·</span> Kubernetes <span>·</span> Platform Engineering</div>
+        <p class="lede">8+ years building scalable cloud platforms, Kubernetes environments, observability stacks, CI/CD pipelines, and cost-optimized AWS infrastructure for global customers.</p>
+        <div class="cta-row">
+          <a href="#projects" class="btn btn-primary">View my work →</a>
+          <a href="https://basilsunny.com/resume.pdf" class="btn btn-ghost">↓ Download resume</a>
+        </div>
+      </div>
+      <div class="id-card">
+        <div class="id-bar"><span class="d"></span><span class="d"></span><span class="d"></span><small>~/profile</small></div>
+        <div class="id-body">
+          <img src="https://basilsunny.com/profile.jpg" alt="Basil Sunny" class="avatar" onerror="this.style.display='none'">
+          <div class="name">Basil Sunny</div>
+          <div class="tag mono">@devops · platform</div>
+          <div class="id-meta mono">
+            <div><span>role</span><b>Sr. DevOps Eng</b></div>
+            <div><span>focus</span><b>Cloud Native</b></div>
+            <div><span>uptime</span><b>24×7</b></div>
+            <div><span>status</span><b style="color:var(--signal)">available</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="n mono">8+</div><div class="l">Years experience</div></div>
+      <div class="stat"><div class="n mono">50+</div><div class="l">Services managed</div></div>
+      <div class="stat"><div class="n mono">AWS</div><div class="l">Cloud-native expert</div></div>
+      <div class="stat"><div class="n mono">24×7</div><div class="l">Mission-critical systems</div></div>
+    </div>
+  </div>
 </header>
 
-<section class="hero container">
-
-<div class="hero-text">
-
-<h1>Basil Sunny</h1>
-
-<h2>Senior DevOps Engineer | AWS | Kubernetes | Platform Engineering</h2>
-
-<p>
-8+ years building scalable cloud platforms, Kubernetes environments,
-observability solutions, CI/CD pipelines and cost-optimized AWS
-infrastructure for global customers.
-</p>
-
-<a href="#projects" class="btn">View My Work</a>
-<a href="resume.pdf" class="btn btn-outline">Download Resume</a>
-
-</div>
-
-<div class="hero-image">
-<img src="profile.jpg" alt="Basil Sunny">
-</div>
-
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow mono reveal">Capabilities</div>
+    <h2 class="reveal">Core skills</h2>
+    <div class="skills">
+      <div class="skill reveal"><h3>AWS</h3><div class="chips"><span class="chip">EKS</span><span class="chip">RDS</span><span class="chip">CloudFront</span><span class="chip">Route53</span><span class="chip">IAM</span></div></div>
+      <div class="skill reveal"><h3>Kubernetes</h3><div class="chips"><span class="chip">EKS</span><span class="chip">Karpenter</span><span class="chip">KEDA</span><span class="chip">Istio</span></div></div>
+      <div class="skill reveal"><h3>Observability</h3><div class="chips"><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">ELK</span></div></div>
+      <div class="skill reveal"><h3>Automation</h3><div class="chips"><span class="chip">Terraform</span><span class="chip">Helm</span><span class="chip">GitHub Actions</span></div></div>
+    </div>
+  </div>
 </section>
 
-<section class="section">
-<div class="container">
-
-<div class="stats">
-
-<div class="stat">
-<h3>8+</h3>
-<p>Years Experience</p>
-</div>
-
-<div class="stat">
-<h3>50+</h3>
-<p>Production Services Managed</p>
-</div>
-
-<div class="stat">
-<h3>AWS</h3>
-<p>Cloud Native Expert</p>
-</div>
-
-<div class="stat">
-<h3>24x7</h3>
-<p>Mission Critical Systems</p>
-</div>
-
-</div>
-
-</div>
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow mono reveal">Selected work</div>
+    <h2 class="reveal">Case studies</h2>
+    <div class="cases">
+      <div class="case reveal">
+        <div class="idx mono">CASE_01</div>
+        <h3>RabbitMQ auto-scaling with KEDA</h3>
+        <p>Designed queue-based autoscaling for Kubernetes workloads using KEDA and RabbitMQ metrics to absorb traffic spikes without over-provisioning.</p>
+        <div class="stack mono"><span>KEDA</span><span>RabbitMQ</span><span>K8s</span></div>
+      </div>
+      <div class="case reveal">
+        <div class="idx mono">CASE_02</div>
+        <h3>Karpenter cost optimization</h3>
+        <p>Implemented dynamic node provisioning and Spot workloads to cut infrastructure cost while keeping application availability intact.</p>
+        <div class="stack mono"><span>Karpenter</span><span>Spot</span><span>EKS</span></div>
+      </div>
+      <div class="case reveal">
+        <div class="idx mono">CASE_03</div>
+        <h3>Aurora failover automation</h3>
+        <p>Built automation to dynamically update network load balancer targets during Aurora failovers, improving database resiliency.</p>
+        <div class="stack mono"><span>Aurora</span><span>NLB</span><span>Automation</span></div>
+      </div>
+      <div class="case reveal">
+        <div class="idx mono">CASE_04</div>
+        <h3>Centralized observability platform</h3>
+        <p>Designed a logging and monitoring stack with Prometheus, Grafana, Fluentd, and Elasticsearch for production systems at scale.</p>
+        <div class="stack mono"><span>Prometheus</span><span>Grafana</span><span>ELK</span></div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="skills" class="section">
-
-<div class="container">
-
-<div class="section-title">
-<h2>Core Skills</h2>
-</div>
-
-<div class="skills">
-
-<div class="skill-card">
-<h3>AWS</h3>
-<p>EKS, RDS, CloudFront, Route53, IAM</p>
-</div>
-
-<div class="skill-card">
-<h3>Kubernetes</h3>
-<p>EKS, Karpenter, KEDA, Istio</p>
-</div>
-
-<div class="skill-card">
-<h3>Observability</h3>
-<p>Prometheus, Grafana, ELK</p>
-</div>
-
-<div class="skill-card">
-<h3>Automation</h3>
-<p>Terraform, Helm, GitHub Actions</p>
-</div>
-
-</div>
-
-</div>
-
+<section id="solved">
+  <div class="wrap">
+    <div class="eyebrow mono reveal">Track record</div>
+    <h2 class="reveal">Problems I've solved</h2>
+    <div class="terminal reveal">
+      <div class="term-bar"><span class="d"></span><span class="d"></span><span class="d"></span><small mono>impact.log — tail -f</small></div>
+      <div class="term-body">
+        <div class="log"><span class="ok">[ OK ]</span><span class="t">resolved</span><span class="msg">Reduced AWS cost via Spot adoption and right-sizing</span></div>
+        <div class="log"><span class="ok">[ OK ]</span><span class="t">resolved</span><span class="msg">Implemented Kubernetes autoscaling using KEDA</span></div>
+        <div class="log"><span class="ok">[ OK ]</span><span class="t">resolved</span><span class="msg">Improved observability with Prometheus and Grafana</span></div>
+        <div class="log"><span class="ok">[ OK ]</span><span class="t">resolved</span><span class="msg">Migrated workloads from EC2 to EKS</span></div>
+        <div class="log"><span class="ok">[ OK ]</span><span class="t">resolved</span><span class="msg">Automated deployments using GitOps</span></div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="projects" class="section">
-
-<div class="container">
-
-<div class="section-title">
-<h2>Case Studies</h2>
-</div>
-
-<div class="cards">
-
-<div class="card">
-<h3>RabbitMQ Auto Scaling with KEDA</h3>
-
-<p>
-Designed queue-based auto scaling for Kubernetes workloads
-using KEDA and RabbitMQ metrics to handle traffic spikes
-without over-provisioning.
-</p>
-
-</div>
-
-<div class="card">
-<h3>Karpenter Cost Optimization</h3>
-
-<p>
-Implemented dynamic node provisioning and Spot workloads
-to reduce infrastructure costs while maintaining application
-availability.
-</p>
-
-</div>
-
-<div class="card">
-<h3>Aurora Failover Automation</h3>
-
-<p>
-Built automation to dynamically update network load balancer
-targets during Aurora failovers, improving resiliency.
-</p>
-
-</div>
-
-<div class="card">
-<h3>Centralized Observability Platform</h3>
-
-<p>
-Designed logging and monitoring stack using Prometheus,
-Grafana, Fluentd and Elasticsearch for production systems.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<div class="container">
-
-<div class="section-title">
-<h2>Problems I've Solved</h2>
-</div>
-
-<div class="cards">
-
-<div class="card">
-<div class="achievement">
-✅ Reduced AWS costs through Spot adoption and right-sizing.
-</div>
-
-<div class="achievement">
-✅ Implemented Kubernetes auto-scaling using KEDA.
-</div>
-
-<div class="achievement">
-✅ Improved observability with Prometheus and Grafana.
-</div>
-
-<div class="achievement">
-✅ Migrated workloads from EC2 to EKS.
-</div>
-
-<div class="achievement">
-✅ Automated deployments using GitOps.
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="contact" class="section">
-
-<div class="container">
-
-<div class="section-title">
-<h2>Let's Connect</h2>
-</div>
-
-<div class="card">
-
-<p>
-Interested in cloud infrastructure, platform engineering,
-Kubernetes, DevOps leadership or consulting opportunities.
-</p>
-
-<br>
-
-<p>
-📧 your-email@example.com
-</p>
-
-<p>
-💼 LinkedIn
-</p>
-
-<p>
-💻 GitHub
-</p>
-
-</div>
-
-</div>
-
+<section id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <div class="eyebrow mono" style="justify-content:center">Get in touch</div>
+      <h2>Let's connect</h2>
+      <p>Interested in cloud infrastructure, platform engineering, Kubernetes, DevOps leadership, or consulting opportunities. Let's talk.</p>
+      <div class="links">
+        <a href="mailto:[email protected]" class="btn btn-primary">✉ Email me</a>
+        <a href="#" class="btn btn-ghost">in / LinkedIn</a>
+        <a href="#" class="btn btn-ghost">⌥ GitHub</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
-© 2026 Basil Sunny | AWS • Kubernetes • Platform Engineering
+  <div class="wrap">© 2026 Basil Sunny — AWS · Kubernetes · Platform Engineering</div>
 </footer>
 
+<script>
+  // mobile menu
+  document.getElementById('menuBtn').addEventListener('click',()=>{
+    document.getElementById('navlinks').classList.toggle('open');
+  });
+  document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>{
+    document.getElementById('navlinks').classList.remove('open');
+  }));
+  // scroll reveal
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*60)+'ms';io.observe(el)});
+</script>
 </body>
 </html>
