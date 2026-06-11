@@ -3,319 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Basil Sunny — Senior DevOps Engineer</title>
+<title>Basil Sunny — DevOps Architect</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0c1015;
-    --bg-2:#11161d;
-    --panel:#151b24;
-    --line:#222b36;
-    --line-2:#2c3744;
-    --txt:#e6edf3;
-    --txt-dim:#8b97a5;
-    --txt-faint:#5d6776;
-    --signal:#3ee07f;
-    --signal-dim:#1f7d4a;
-    --amber:#f5c451;
-    --radius:6px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--bg);
-    color:var(--txt);
-    font-family:'Space Grotesk',system-ui,sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:48px 48px;opacity:.18;
-    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%);
-  }
-  .mono{font-family:'JetBrains Mono',monospace}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
-
-  /* NAV */
-  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
-    background:rgba(12,16,21,.78);border-bottom:1px solid var(--line)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;height:62px}
-  .brand{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:15px;letter-spacing:.5px}
-  .brand .dot{color:var(--signal)}
-  .nav-links{display:flex;gap:30px;font-size:14px;font-family:'JetBrains Mono',monospace}
-  .nav-links a{color:var(--txt-dim);transition:color .2s}
-  .nav-links a:hover{color:var(--signal)}
-  .menu-btn{display:none;background:none;border:none;color:var(--txt);font-size:22px;cursor:pointer}
-
-  /* HERO */
-  header{padding:78px 0 56px}
-  .status-line{display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;
-    font-size:12.5px;color:var(--txt-dim);border:1px solid var(--line-2);border-radius:100px;
-    padding:6px 14px;margin-bottom:30px;background:var(--bg-2)}
-  .pulse{width:8px;height:8px;border-radius:50%;background:var(--signal);
-    box-shadow:0 0 0 0 rgba(62,224,127,.55);animation:pulse 2.4s infinite}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(62,224,127,.5)}70%{box-shadow:0 0 0 9px rgba(62,224,127,0)}100%{box-shadow:0 0 0 0 rgba(62,224,127,0)}}
-  .hero-grid{display:grid;grid-template-columns:1fr 320px;gap:54px;align-items:center}
-  h1{font-size:clamp(40px,6.4vw,72px);font-weight:700;line-height:1.02;letter-spacing:-1.5px;margin-bottom:18px}
-  .role{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--signal);margin-bottom:22px;letter-spacing:.3px}
-  .role span{color:var(--txt-faint)}
-  .lede{font-size:17.5px;color:var(--txt-dim);max-width:520px;margin-bottom:34px;line-height:1.65}
-  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
-  .btn{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;padding:13px 22px;
-    border-radius:var(--radius);border:1px solid var(--line-2);transition:all .2s;cursor:pointer;display:inline-flex;align-items:center;gap:9px}
-  .btn-primary{background:var(--signal);color:#06140c;border-color:var(--signal);font-weight:600}
-  .btn-primary:hover{background:#5af094;box-shadow:0 0 24px rgba(62,224,127,.35);transform:translateY(-2px)}
-  .btn-ghost{background:transparent;color:var(--txt)}
-  .btn-ghost:hover{border-color:var(--signal);color:var(--signal);transform:translateY(-2px)}
-
-  /* AVATAR PANEL */
-  .id-card{background:var(--panel);border:1px solid var(--line-2);border-radius:10px;overflow:hidden}
-  .id-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--bg-2)}
-  .id-bar .d{width:11px;height:11px;border-radius:50%;background:var(--line-2)}
-  .id-bar .d:nth-child(1){background:#ec6a5e}.id-bar .d:nth-child(2){background:#f5bf4f}.id-bar .d:nth-child(3){background:var(--signal)}
-  .id-bar small{margin-left:6px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--txt-faint)}
-  .id-body{padding:24px;text-align:center}
-  .avatar{width:108px;height:108px;border-radius:50%;margin:0 auto 16px;object-fit:cover;
-    border:2px solid var(--signal-dim);background:var(--bg-2)}
-  .id-body .name{font-weight:600;font-size:18px}
-  .id-body .tag{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--txt-dim);margin-top:3px}
-  .id-meta{margin-top:18px;border-top:1px solid var(--line);padding-top:16px;font-family:'JetBrains Mono',monospace;font-size:12px;text-align:left;display:grid;gap:9px}
-  .id-meta div{display:flex;justify-content:space-between;color:var(--txt-faint)}
-  .id-meta b{color:var(--txt);font-weight:500}
-
-  /* STATS */
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:64px;
-    border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
-  .stat{padding:26px 22px;border-right:1px solid var(--line)}
-  .stat:last-child{border-right:none}
-  .stat .n{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;color:var(--signal);letter-spacing:-1px}
-  .stat .l{font-size:13px;color:var(--txt-dim);margin-top:4px}
-
-  /* SECTION */
-  section{padding:74px 0}
-  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--signal);
-    letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
-  .eyebrow::before{content:"";width:26px;height:1px;background:var(--signal-dim)}
-  h2{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-1px;margin-bottom:38px}
-
-  /* SKILLS */
-  .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .skill{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px;transition:all .25s}
-  .skill:hover{border-color:var(--signal-dim);transform:translateY(-3px)}
-  .skill h3{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;margin-bottom:12px;color:var(--txt)}
-  .skill h3::before{content:"› ";color:var(--signal)}
-  .chips{display:flex;flex-wrap:wrap;gap:7px}
-  .chip{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--txt-dim);
-    background:var(--bg-2);border:1px solid var(--line);border-radius:5px;padding:4px 9px}
-
-  /* CASE STUDIES */
-  .cases{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .case{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:26px;position:relative;transition:all .25s;overflow:hidden}
-  .case::after{content:"";position:absolute;left:0;top:0;height:100%;width:3px;background:var(--signal);transform:scaleY(0);transform-origin:top;transition:transform .3s}
-  .case:hover{border-color:var(--line-2);transform:translateY(-3px)}
-  .case:hover::after{transform:scaleY(1)}
-  .case .idx{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--txt-faint);margin-bottom:14px}
-  .case h3{font-size:19px;font-weight:600;margin-bottom:10px}
-  .case p{font-size:14.5px;color:var(--txt-dim);line-height:1.6}
-  .case .stack{margin-top:16px;display:flex;gap:7px;flex-wrap:wrap}
-  .case .stack span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--signal);opacity:.8}
-
-  /* SOLVED — terminal log */
-  .terminal{background:#0a0e13;border:1px solid var(--line-2);border-radius:10px;overflow:hidden}
-  .term-bar{display:flex;align-items:center;gap:7px;padding:11px 15px;border-bottom:1px solid var(--line);background:var(--bg-2)}
-  .term-bar .d{width:11px;height:11px;border-radius:50%}
-  .term-bar .d:nth-child(1){background:#ec6a5e}.term-bar .d:nth-child(2){background:#f5bf4f}.term-bar .d:nth-child(3){background:var(--signal)}
-  .term-bar small{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--txt-faint)}
-  .term-body{padding:22px 24px;font-family:'JetBrains Mono',monospace;font-size:14px}
-  .log{display:flex;gap:12px;padding:7px 0;color:var(--txt)}
-  .log .ok{color:var(--signal);flex-shrink:0}
-  .log .t{color:var(--txt-faint);flex-shrink:0}
-  .log .msg{color:var(--txt-dim)}
-
-  /* CONTACT */
-  .contact{background:var(--panel);border:1px solid var(--line-2);border-radius:12px;padding:48px;text-align:center}
-  .contact h2{margin-bottom:14px}
-  .contact p{color:var(--txt-dim);max-width:520px;margin:0 auto 30px;font-size:16px}
-  .links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-
-  footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;
-    font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--txt-faint)}
-
-  /* reveal */
-  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
-  .reveal.in{opacity:1;transform:none}
-
-  @media(max-width:860px){
-    .hero-grid{grid-template-columns:1fr}
-    .id-card{max-width:340px;margin:0 auto}
-    .stats{grid-template-columns:1fr 1fr}
-    .stat:nth-child(2){border-right:none}.stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line)}
-    .skills{grid-template-columns:1fr 1fr}
-    .cases{grid-template-columns:1fr}
-    .nav-links{display:none}.menu-btn{display:block}
-    .nav-links.open{display:flex;position:absolute;top:62px;left:0;right:0;flex-direction:column;
-      background:var(--bg-2);border-bottom:1px solid var(--line);padding:18px 28px;gap:16px}
-  }
-  @media(max-width:480px){
-    .skills{grid-template-columns:1fr}
-    .stats{grid-template-columns:1fr 1fr}
-    .contact{padding:32px 22px}
-  }
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav>
+<nav class="nav">
   <div class="wrap nav-in">
-    <a href="#" class="brand">basilsunny<span class="dot">.</span>com</a>
+    <a href="index.html" class="brand">
+      <span class="mark">BS</span>
+      <span class="who"><b>Basil Sunny</b><span>DevOps Architect</span></span>
+    </a>
     <div class="nav-links" id="navlinks">
-      <a href="#skills">skills</a>
-      <a href="#projects">case_studies</a>
-      <a href="#solved">solved</a>
-      <a href="#contact">contact</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="problems.html">Problems Solved</a>
+      <a href="skills.html">Skills</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html" class="nav-cta">Get in touch</a>
     </div>
     <button class="menu-btn" id="menuBtn" aria-label="Menu">≡</button>
   </div>
 </nav>
 
-<header>
+<section class="pagehead">
   <div class="wrap">
-    <div class="status-line mono"><span class="pulse"></span> all systems operational · open to opportunities</div>
-    <div class="hero-grid">
+    <div class="hero">
       <div>
+        <div class="eyebrow">DevOps Architect</div>
         <h1>Basil Sunny</h1>
-        <div class="role mono">Senior DevOps Engineer <span>//</span> AWS <span>·</span> Kubernetes <span>·</span> Platform Engineering</div>
-        <p class="lede">8+ years building scalable cloud platforms, Kubernetes environments, observability stacks, CI/CD pipelines, and cost-optimized AWS infrastructure for global customers.</p>
-        <div class="cta-row">
-          <a href="#projects" class="btn btn-primary">View my work →</a>
-          <a href="https://basilsunny.com/resume.pdf" class="btn btn-ghost">↓ Download resume</a>
+        <p class="lede">I design and operate cloud platforms that engineering teams can trust — building resilient AWS and Kubernetes infrastructure, automating the toil out of operations, and giving teams the observability and delivery pipelines they need to ship with confidence. My work sits where reliability, cost, and developer velocity meet.</p>
+        <div class="ctas">
+          <a href="problems.html" class="btn btn-primary">View my work →</a>
+          <a href="resume.pdf" class="btn btn-outline">↓ Download résumé</a>
         </div>
       </div>
-      <div class="id-card">
-        <div class="id-bar"><span class="d"></span><span class="d"></span><span class="d"></span><small>~/profile</small></div>
-        <div class="id-body">
-          <img src="https://basilsunny.com/profile.jpg" alt="Basil Sunny" class="avatar" onerror="this.style.display='none'">
+      <div class="profile-card reveal">
+        <div class="ph"></div>
+        <div class="body">
+          <img src="profile.jpg" alt="Basil Sunny" class="avatar" onerror="this.style.display='none'">
           <div class="name">Basil Sunny</div>
-          <div class="tag mono">@devops · platform</div>
-          <div class="id-meta mono">
-            <div><span>role</span><b>Sr. DevOps Eng</b></div>
-            <div><span>focus</span><b>Cloud Native</b></div>
-            <div><span>uptime</span><b>24×7</b></div>
-            <div><span>status</span><b style="color:var(--signal)">available</b></div>
-          </div>
+          <div class="role">DevOps Architect</div>
+          <ul>
+            <li><span>Experience</span><b>8+ years</b></li>
+            <li><span>Focus</span><b>AWS · Kubernetes</b></li>
+            <li><span>Domain</span><b>Platform Eng</b></li>
+            <li><span>Based in</span><b>India</b></li>
+          </ul>
         </div>
       </div>
     </div>
-
-    <div class="stats reveal">
-      <div class="stat"><div class="n mono">8+</div><div class="l">Years experience</div></div>
-      <div class="stat"><div class="n mono">50+</div><div class="l">Services managed</div></div>
-      <div class="stat"><div class="n mono">AWS</div><div class="l">Cloud-native expert</div></div>
-      <div class="stat"><div class="n mono">24×7</div><div class="l">Mission-critical systems</div></div>
-    </div>
-  </div>
-</header>
-
-<section id="skills">
-  <div class="wrap">
-    <div class="eyebrow mono reveal">Capabilities</div>
-    <h2 class="reveal">Core skills</h2>
-    <div class="skills">
-      <div class="skill reveal"><h3>AWS</h3><div class="chips"><span class="chip">EKS</span><span class="chip">RDS</span><span class="chip">CloudFront</span><span class="chip">Route53</span><span class="chip">IAM</span></div></div>
-      <div class="skill reveal"><h3>Kubernetes</h3><div class="chips"><span class="chip">EKS</span><span class="chip">Karpenter</span><span class="chip">KEDA</span><span class="chip">Istio</span></div></div>
-      <div class="skill reveal"><h3>Observability</h3><div class="chips"><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">ELK</span></div></div>
-      <div class="skill reveal"><h3>Automation</h3><div class="chips"><span class="chip">Terraform</span><span class="chip">Helm</span><span class="chip">GitHub Actions</span></div></div>
-    </div>
   </div>
 </section>
 
-<section id="projects">
+<section>
   <div class="wrap">
-    <div class="eyebrow mono reveal">Selected work</div>
-    <h2 class="reveal">Case studies</h2>
-    <div class="cases">
-      <div class="case reveal">
-        <div class="idx mono">CASE_01</div>
-        <h3>RabbitMQ auto-scaling with KEDA</h3>
-        <p>Designed queue-based autoscaling for Kubernetes workloads using KEDA and RabbitMQ metrics to absorb traffic spikes without over-provisioning.</p>
-        <div class="stack mono"><span>KEDA</span><span>RabbitMQ</span><span>K8s</span></div>
-      </div>
-      <div class="case reveal">
-        <div class="idx mono">CASE_02</div>
-        <h3>Karpenter cost optimization</h3>
-        <p>Implemented dynamic node provisioning and Spot workloads to cut infrastructure cost while keeping application availability intact.</p>
-        <div class="stack mono"><span>Karpenter</span><span>Spot</span><span>EKS</span></div>
-      </div>
-      <div class="case reveal">
-        <div class="idx mono">CASE_03</div>
-        <h3>Aurora failover automation</h3>
-        <p>Built automation to dynamically update network load balancer targets during Aurora failovers, improving database resiliency.</p>
-        <div class="stack mono"><span>Aurora</span><span>NLB</span><span>Automation</span></div>
-      </div>
-      <div class="case reveal">
-        <div class="idx mono">CASE_04</div>
-        <h3>Centralized observability platform</h3>
-        <p>Designed a logging and monitoring stack with Prometheus, Grafana, Fluentd, and Elasticsearch for production systems at scale.</p>
-        <div class="stack mono"><span>Prometheus</span><span>Grafana</span><span>ELK</span></div>
-      </div>
+    <div class="sec-head reveal">
+      <div class="eyebrow">Career history</div>
+      <h2>Where I've worked</h2>
+      <p>A track record of building and running production infrastructure across growing engineering organisations. Replace the placeholder companies and dates below with your own.</p>
     </div>
-  </div>
-</section>
 
-<section id="solved">
-  <div class="wrap">
-    <div class="eyebrow mono reveal">Track record</div>
-    <h2 class="reveal">Problems I've solved</h2>
-    <div class="terminal reveal">
-      <div class="term-bar"><span class="d"></span><span class="d"></span><span class="d"></span><small mono>impact.log — tail -f</small></div>
-      <div class="term-body">
-        <div class="log"><span class="ok">[ OK ]</span><span class="t">resolved</span><span class="msg">Reduced AWS cost via Spot adoption and right-sizing</span></div>
-        <div class="log"><span class="ok">[ OK ]</span><span class="t">resolved</span><span class="msg">Implemented Kubernetes autoscaling using KEDA</span></div>
-        <div class="log"><span class="ok">[ OK ]</span><span class="t">resolved</span><span class="msg">Improved observability with Prometheus and Grafana</span></div>
-        <div class="log"><span class="ok">[ OK ]</span><span class="t">resolved</span><span class="msg">Migrated workloads from EC2 to EKS</span></div>
-        <div class="log"><span class="ok">[ OK ]</span><span class="t">resolved</span><span class="msg">Automated deployments using GitOps</span></div>
+    <div class="timeline">
+      <div class="job reveal">
+        <div class="when">2022 — Present</div>
+        <h3>DevOps Architect</h3>
+        <div class="co">Company Name · Bengaluru, India</div>
+        <ul>
+          <li>Own the cloud platform strategy across multiple product teams, standardising AWS and Kubernetes practices.</li>
+          <li>Lead infrastructure architecture reviews and set guardrails for security, cost, and reliability.</li>
+          <li>Mentor engineers and drive the adoption of GitOps and infrastructure-as-code organisation-wide.</li>
+        </ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="wrap">
-    <div class="contact reveal">
-      <div class="eyebrow mono" style="justify-content:center">Get in touch</div>
-      <h2>Let's connect</h2>
-      <p>Interested in cloud infrastructure, platform engineering, Kubernetes, DevOps leadership, or consulting opportunities. Let's talk.</p>
-      <div class="links">
-        <a href="mailto:[email protected]" class="btn btn-primary">✉ Email me</a>
-        <a href="#" class="btn btn-ghost">in / LinkedIn</a>
-        <a href="#" class="btn btn-ghost">⌥ GitHub</a>
+      <div class="job reveal">
+        <div class="when">2019 — 2022</div>
+        <h3>Senior DevOps Engineer</h3>
+        <div class="co">Company Name · Location</div>
+        <ul>
+          <li>Built and operated EKS-based platforms serving 50+ production services with high availability.</li>
+          <li>Implemented autoscaling, observability, and CI/CD pipelines that reduced deployment friction.</li>
+          <li>Drove AWS cost optimisation initiatives through right-sizing and Spot adoption.</li>
+        </ul>
+      </div>
+      <div class="job reveal">
+        <div class="when">2016 — 2019</div>
+        <h3>DevOps / Cloud Engineer</h3>
+        <div class="co">Company Name · Location</div>
+        <ul>
+          <li>Migrated legacy workloads from EC2 to containerised Kubernetes environments.</li>
+          <li>Automated provisioning with Terraform and configuration management tooling.</li>
+          <li>Set up centralised logging and monitoring for production systems.</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">© 2026 Basil Sunny — AWS · Kubernetes · Platform Engineering</div>
+  <div class="wrap foot-in">
+    <span>© 2026 Basil Sunny — DevOps Architect</span>
+    <div class="fl">
+      <a href="problems.html">Problems Solved</a>
+      <a href="skills.html">Skills</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
 </footer>
 
-<script>
-  // mobile menu
-  document.getElementById('menuBtn').addEventListener('click',()=>{
-    document.getElementById('navlinks').classList.toggle('open');
-  });
-  document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>{
-    document.getElementById('navlinks').classList.remove('open');
-  }));
-  // scroll reveal
-  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
-  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*60)+'ms';io.observe(el)});
-</script>
+<script src="app.js"></script>
 </body>
 </html>

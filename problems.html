@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Problems Solved — Basil Sunny</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand">
+      <span class="mark">BS</span>
+      <span class="who"><b>Basil Sunny</b><span>DevOps Architect</span></span>
+    </a>
+    <div class="nav-links" id="navlinks">
+      <a href="index.html">Home</a>
+      <a href="problems.html" class="active">Problems Solved</a>
+      <a href="skills.html">Skills</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html" class="nav-cta">Get in touch</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">≡</button>
+  </div>
+</nav>
+
+<section class="pagehead">
+  <div class="wrap">
+    <div class="eyebrow">Problems Solved</div>
+    <h1>Engineering, not just operations</h1>
+    <p class="sub">Good DevOps isn't about keeping the lights on — it's about removing the recurring problems that make infrastructure hard to operate in the first place. Each entry below is a real problem I diagnosed, the approach I took, and the outcome it produced.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="edit-hint reveal">✎ Tip: click any text in a widget to edit it directly in your browser, then copy the updated wording back into this file. Add or remove widgets by duplicating a <code>&lt;div class="card problem"&gt;</code> block.</div>
+
+    <div class="grid cols-2">
+
+      <div class="card problem reveal">
+        <span class="tag">Autoscaling</span>
+        <h3 class="editable" contenteditable="true">RabbitMQ-driven autoscaling with KEDA</h3>
+        <div class="lbl">Problem</div>
+        <p class="editable" contenteditable="true">Workloads couldn't keep up with sudden traffic spikes, while over-provisioning to compensate wasted spend during quiet periods.</p>
+        <div class="lbl">Approach</div>
+        <p class="editable" contenteditable="true">Designed queue-based autoscaling for Kubernetes workloads using KEDA and live RabbitMQ queue metrics, so capacity tracked demand in real time.</p>
+        <div class="lbl">Outcome</div>
+        <p class="editable" contenteditable="true">Absorbed spikes reliably without manual intervention and removed the need for permanent over-provisioning.</p>
+        <div class="stack"><span>KEDA</span><span>RabbitMQ</span><span>Kubernetes</span></div>
+      </div>
+
+      <div class="card problem reveal">
+        <span class="tag">Cost</span>
+        <h3 class="editable" contenteditable="true">Karpenter cost optimisation</h3>
+        <div class="lbl">Problem</div>
+        <p class="editable" contenteditable="true">Static node groups left clusters paying for idle capacity and missing out on Spot savings.</p>
+        <div class="lbl">Approach</div>
+        <p class="editable" contenteditable="true">Implemented dynamic node provisioning with Karpenter and shifted suitable workloads onto Spot instances with safe fallbacks.</p>
+        <div class="lbl">Outcome</div>
+        <p class="editable" contenteditable="true">Cut infrastructure cost meaningfully while keeping application availability intact.</p>
+        <div class="stack"><span>Karpenter</span><span>EC2 Spot</span><span>EKS</span></div>
+      </div>
+
+      <div class="card problem reveal">
+        <span class="tag">Resilience</span>
+        <h3 class="editable" contenteditable="true">Aurora failover automation</h3>
+        <div class="lbl">Problem</div>
+        <p class="editable" contenteditable="true">During Aurora failovers, load balancer targets pointed at the wrong database node, causing avoidable disruption.</p>
+        <div class="lbl">Approach</div>
+        <p class="editable" contenteditable="true">Built automation to detect failovers and dynamically update network load balancer targets to the new primary.</p>
+        <div class="lbl">Outcome</div>
+        <p class="editable" contenteditable="true">Improved database resilience and reduced recovery time during failover events.</p>
+        <div class="stack"><span>Aurora</span><span>NLB</span><span>Automation</span></div>
+      </div>
+
+      <div class="card problem reveal">
+        <span class="tag">Observability</span>
+        <h3 class="editable" contenteditable="true">Centralised observability platform</h3>
+        <div class="lbl">Problem</div>
+        <p class="editable" contenteditable="true">Logs and metrics were scattered across systems, making incidents slow to diagnose.</p>
+        <div class="lbl">Approach</div>
+        <p class="editable" contenteditable="true">Designed a unified logging and monitoring stack with Prometheus, Grafana, Fluentd, and Elasticsearch.</p>
+        <div class="lbl">Outcome</div>
+        <p class="editable" contenteditable="true">Gave teams a single place to understand system health and shortened time-to-diagnosis.</p>
+        <div class="stack"><span>Prometheus</span><span>Grafana</span><span>ELK</span></div>
+      </div>
+
+      <div class="card problem reveal">
+        <span class="tag">Delivery</span>
+        <h3 class="editable" contenteditable="true">GitOps deployment automation</h3>
+        <div class="lbl">Problem</div>
+        <p class="editable" contenteditable="true">Manual deployments were error-prone and lacked a reliable audit trail.</p>
+        <div class="lbl">Approach</div>
+        <p class="editable" contenteditable="true">Moved deployments to a GitOps model where the desired state lives in version control and is reconciled automatically.</p>
+        <div class="lbl">Outcome</div>
+        <p class="editable" contenteditable="true">Made releases repeatable, reviewable, and easy to roll back.</p>
+        <div class="stack"><span>GitOps</span><span>Helm</span><span>CI/CD</span></div>
+      </div>
+
+      <div class="card problem reveal">
+        <span class="tag">Migration</span>
+        <h3 class="editable" contenteditable="true">EC2 to EKS migration</h3>
+        <div class="lbl">Problem</div>
+        <p class="editable" contenteditable="true">Legacy EC2 workloads were hard to scale and operationally heavy to maintain.</p>
+        <div class="lbl">Approach</div>
+        <p class="editable" contenteditable="true">Containerised the workloads and migrated them onto managed EKS with appropriate scaling and health checks.</p>
+        <div class="lbl">Outcome</div>
+        <p class="editable" contenteditable="true">Simplified operations and unlocked elastic scaling for the migrated services.</p>
+        <div class="stack"><span>EKS</span><span>Docker</span><span>Terraform</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 Basil Sunny — DevOps Architect</span>
+    <div class="fl">
+      <a href="index.html">Home</a>
+      <a href="skills.html">Skills</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
