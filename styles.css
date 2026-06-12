@@ -50,6 +50,7 @@ h1,h2,h3,h4{color:var(--ink);font-family:"Newsreader","Georgia",serif;font-weigh
 .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
   font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .eyebrow::before{content:"";width:24px;height:2px;background:var(--accent);opacity:.5}
+.greeting{font-size:16px;color:var(--slate-2);margin-bottom:8px}
 .pagehead h1{font-size:clamp(32px,5vw,46px)}
 .pagehead .sub{font-size:18px;color:var(--slate-2);max-width:620px;margin-top:14px}
 
