@@ -8,6 +8,56 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+/* ===== Skills page — scoped additions (reuses global tokens) ===== */
+.skills-controls{display:flex;justify-content:flex-end;margin-bottom:18px}
+.skills-toggle{font-size:13px;font-weight:500;color:var(--slate-2);background:#fff;
+  border:1px solid var(--line-2);border-radius:7px;padding:8px 14px;cursor:pointer;transition:.18s}
+.skills-toggle:hover{border-color:var(--accent);color:var(--accent)}
+
+.skills-list{display:grid;gap:16px}
+
+.skillcat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;transition:.22s}
+.skillcat:hover{border-color:var(--line-2)}
+.skillcat.open{box-shadow:0 12px 34px rgba(15,30,52,.10)}
+
+.skillcat-head{display:flex;align-items:center;gap:18px;width:100%;text-align:left;cursor:pointer;
+  background:none;border:0;padding:22px 26px;font-family:inherit}
+.skillcat-num{font-size:13px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;
+  width:26px;flex-shrink:0}
+.skillcat-ic{width:46px;height:46px;border-radius:10px;flex-shrink:0;display:grid;place-items:center;
+  background:#eaf2fd;font-size:21px}
+.skillcat-tt{flex:1;min-width:0}
+.skillcat-tt h3{font-size:18px;line-height:1.25}
+.skillcat-tt p{font-size:13.5px;color:var(--slate-2);margin-top:2px}
+.skillcat-chev{flex-shrink:0;color:var(--slate-2);font-size:13px;transition:transform .25s ease}
+.skillcat.open .skillcat-chev{transform:rotate(90deg);color:var(--accent)}
+
+.skillcat-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.skillcat.open .skillcat-body{grid-template-rows:1fr}
+.skillcat-body-in{overflow:hidden}
+
+.skillgroup{padding:0 26px}
+.skillgroup-sub{display:flex;align-items:baseline;gap:10px;padding:15px 0 11px;border-top:1px solid var(--line)}
+.skillgroup-sub h4{font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
+.skillgroup-sub .badge{font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--accent);background:#eaf2fd;border-radius:5px;padding:2px 8px}
+.skillgroup-sub .badge.gold{color:var(--gold);background:#f7efe1}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:18px}
+.chip{font-size:13.5px;color:var(--slate);background:var(--bg);border:1px solid var(--line);
+  border-radius:6px;padding:6px 12px;transition:.15s}
+.chip:hover{border-color:var(--line-2);color:var(--ink)}
+.chip.lead{color:var(--accent-dk);border-color:#bcd6f6;background:#eaf2fd;font-weight:500}
+.chips-flat{padding:8px 26px 22px}
+
+@media(max-width:680px){
+  .skillcat-num{display:none}
+  .skillcat-head{padding:18px;gap:14px}
+  .skillgroup,.chips-flat{padding-left:18px;padding-right:18px}
+}
+</style>
 </head>
 <body>
 
@@ -31,17 +81,16 @@
   <div class="wrap">
     <div class="eyebrow">Skills</div>
     <h1>Tools &amp; capabilities</h1>
-    <p class="sub">A breakdown of the platforms, tooling, and practices I work with day to day.</p>
+    <p class="sub">The platforms, tooling, and practices I work with day to day — organised by discipline. Select any category to expand the full breakdown.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="soon reveal">
-      <div class="ic">🛠️</div>
-      <h3>Coming soon</h3>
-      <p>This page is reserved for a detailed skills breakdown. When you're ready, I can populate it with categorised proficiencies, certifications, and tooling.</p>
+    <div class="skills-controls reveal">
+      <button class="skills-toggle" id="skillsToggle">Expand all</button>
     </div>
+    <div class="skills-list" id="skillsList"></div>
   </div>
 </section>
 
@@ -52,5 +101,157 @@
 </footer>
 
 <script src="app.js"></script>
+<script>
+/* ---------------------------------------------------------------------------
+   EDIT YOUR SKILLS HERE
+   - Each category has an icon, title, sub-line, and either:
+       items:  a flat chip list, or
+       groups: sub-categories (e.g. AWS / GCP) each with their own chips.
+   - Mark a headline skill with  lead:true  to highlight it.
+   - Add/remove/reorder freely — the page rebuilds automatically.
+--------------------------------------------------------------------------- */
+const SKILLS = [
+  {
+    icon:"🐧", title:"Operating Systems", sub:"Linux administration across enterprise and community distros",
+    items:[
+      {name:"RHEL / Red Hat",lead:true},{name:"Debian",lead:true},{name:"Ubuntu"},
+      {name:"systemd"},{name:"Networking & firewall"},{name:"Package management (yum / apt)"},
+      {name:"Performance tuning"},{name:"Patching & hardening"}
+    ]
+  },
+  {
+    icon:"⌨️", title:"Scripting & Automation", sub:"Glue code and tooling that removes operational toil",
+    items:[
+      {name:"Bash",lead:true},{name:"Python",lead:true},{name:"Shell automation"},
+      {name:"boto3 (AWS SDK)"},{name:"YAML / JSON"},{name:"Cron / scheduling"}
+    ]
+  },
+  {
+    icon:"☁️", title:"Cloud Platforms", sub:"Designing and operating production cloud environments",
+    groups:[
+      {label:"AWS", badge:"Primary", badgeGold:true, chips:[
+        {name:"EC2",lead:true},{name:"EKS",lead:true},{name:"S3",lead:true},
+        {name:"VPC"},{name:"IAM"},{name:"RDS / Aurora"},{name:"Lambda"},{name:"CloudWatch"},
+        {name:"Route 53"},{name:"ELB / ALB / NLB"},{name:"Auto Scaling"},{name:"CloudFront"},
+        {name:"EBS / EFS"},{name:"ECR"},{name:"Spot & cost optimisation"}
+      ]},
+      {label:"GCP", badge:"Secondary", chips:[
+        {name:"GCE"},{name:"GKE"},{name:"Cloud Storage"},{name:"VPC"},
+        {name:"IAM"},{name:"Cloud Load Balancing"},{name:"Cloud Monitoring"}
+      ]},
+      {label:"On-prem / Other", badge:"", chips:[
+        {name:"OpenShift"}
+      ]}
+    ]
+  },
+  {
+    icon:"📐", title:"Infrastructure as Code", sub:"Provisioning and configuration management",
+    items:[
+      {name:"Terraform",lead:true},{name:"CloudFormation",lead:true},{name:"Ansible",lead:true},
+      {name:"Terraform modules"},{name:"Remote state & backends"},
+      {name:"Ansible playbooks & roles"},{name:"GitOps workflows"}
+    ]
+  },
+  {
+    icon:"📦", title:"Containers & Orchestration", sub:"Packaging and running workloads at scale",
+    items:[
+      {name:"Docker",lead:true},{name:"Kubernetes",lead:true},{name:"EKS"},{name:"GKE"},
+      {name:"Helm"},{name:"KEDA"},{name:"Karpenter"},{name:"kubectl"},
+      {name:"Autoscaling (HPA / CA)"},{name:"Ingress controllers"},{name:"Container registries"}
+    ]
+  },
+  {
+    icon:"🔁", title:"CI / CD & Delivery", sub:"Build, test, and deployment pipelines",
+    items:[
+      {name:"Jenkins",lead:true},{name:"Git",lead:true},{name:"CircleCI"},
+      {name:"Harness CI"},{name:"Octopus Deploy"},{name:"GitOps"},
+      {name:"Pipeline as code"},{name:"Release automation"}
+    ]
+  },
+  {
+    icon:"📊", title:"Observability & Monitoring", sub:"Metrics, logs, dashboards, and alerting",
+    groups:[
+      {label:"Metrics & Dashboards", badge:"", chips:[
+        {name:"Prometheus",lead:true},{name:"Grafana",lead:true},
+        {name:"Zabbix"},{name:"New Relic"},{name:"Nagios"}
+      ]},
+      {label:"Logging", badge:"", chips:[
+        {name:"ELK Stack",lead:true},{name:"Elasticsearch"},{name:"Logstash"},
+        {name:"Kibana"},{name:"Elastic Cloud"}
+      ]},
+      {label:"Alerting & On-call", badge:"", chips:[
+        {name:"Opsgenie",lead:true},{name:"Alertmanager"},{name:"Incident response & RCA"}
+      ]}
+    ]
+  },
+  {
+    icon:"🖥️", title:"Virtualization & Hosting", sub:"Hypervisors and server management",
+    items:[
+      {name:"KVM",lead:true},{name:"XEN Hypervisor"},{name:"OpenVZ"},
+      {name:"cPanel"},{name:"VM provisioning"},{name:"Shared web servers"}
+    ]
+  }
+];
+
+(function(){
+  const list = document.getElementById('skillsList');
+  const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const chip = c => `<span class="chip${c.lead?' lead':''}">${esc(c.name)}</span>`;
+
+  SKILLS.forEach((cat, i) => {
+    const num = String(i + 1).padStart(2, '0');
+    let body = '';
+    if (cat.groups){
+      body = cat.groups.map(g => `
+        <div class="skillgroup">
+          <div class="skillgroup-sub">
+            <h4>${esc(g.label)}</h4>
+            ${g.badge ? `<span class="badge${g.badgeGold?' gold':''}">${esc(g.badge)}</span>` : ''}
+          </div>
+          <div class="chips">${g.chips.map(chip).join('')}</div>
+        </div>`).join('');
+    } else {
+      body = `<div class="chips-flat"><div class="chips">${cat.items.map(chip).join('')}</div></div>`;
+    }
+
+    const el = document.createElement('div');
+    el.className = 'skillcat' + (i === 0 ? ' open' : '');
+    el.innerHTML = `
+      <button class="skillcat-head" aria-expanded="${i===0}">
+        <span class="skillcat-num">${num}</span>
+        <span class="skillcat-ic">${cat.icon}</span>
+        <span class="skillcat-tt"><h3>${esc(cat.title)}</h3><p>${esc(cat.sub)}</p></span>
+        <span class="skillcat-chev">▶</span>
+      </button>
+      <div class="skillcat-body"><div class="skillcat-body-in">${body}</div></div>`;
+
+    const head = el.querySelector('.skillcat-head');
+    head.addEventListener('click', () => {
+      const open = el.classList.toggle('open');
+      head.setAttribute('aria-expanded', open);
+      syncToggle();
+    });
+    list.appendChild(el);
+  });
+
+  // Expand / collapse all
+  const toggle = document.getElementById('skillsToggle');
+  function syncToggle(){
+    const cats = [...list.querySelectorAll('.skillcat')];
+    const allOpen = cats.every(c => c.classList.contains('open'));
+    toggle.textContent = allOpen ? 'Collapse all' : 'Expand all';
+  }
+  toggle.addEventListener('click', () => {
+    const cats = [...list.querySelectorAll('.skillcat')];
+    const allOpen = cats.every(c => c.classList.contains('open'));
+    cats.forEach(c => {
+      c.classList.toggle('open', !allOpen);
+      c.querySelector('.skillcat-head').setAttribute('aria-expanded', !allOpen);
+    });
+    syncToggle();
+  });
+  syncToggle();
+})();
+</script>
 </body>
 </html>
