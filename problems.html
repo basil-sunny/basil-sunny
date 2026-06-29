@@ -65,6 +65,19 @@
         <div class="stack"><span>YAML</span><span>CircleCI</span><span>Octopus Deploy</span><span>Terraform</span></div>
       </div>
 
+      <div class="card problem reveal">
+        <span class="tag">Observability</span>
+        <span class="tag">Developer Productivity</span>
+        <h3>Centralized logging for Kubernetes clusters</h3>
+        <div class="lbl">Challenge</div>
+        <p>Filebeat-based log shipping from EC2 couldn't handle the complexity of containerized environments, lacking the advanced keyword filtering and custom datastream configurations needed for microservices.</p>
+        <div class="lbl">Solution</div>
+        <p>Implemented Fluentd with advanced log processing and transformation capabilities to intelligently route logs from microservices to Elastic Cloud (SaaS) with workload-specific configurations.</p>
+        <div class="lbl">Result</div>
+        <p>Established central logging across all EKS clusters with Kubernetes-native keywords, tiered retention policies for production and non-production environments, and simplified troubleshooting for teams.</p>
+        <div class="stack"><span>Fluentd</span><span>Elasticsearch</span><span>Kibana</span><span>Elastic Cloud</span><span>Terraform</span></div>
+      </div>
+
     </div>
   </div>
 </section>
