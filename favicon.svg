@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background circle -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f1e34;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16294a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <circle cx="100" cy="100" r="100" fill="url(#bgGradient)"/>
+  
+  <!-- DevOps gear/cycle central element -->
+  <!-- Outer circle ring -->
+  <circle cx="100" cy="100" r="70" fill="none" stroke="#1d6fdb" stroke-width="2" opacity="0.6"/>
+  <circle cx="100" cy="100" r="60" fill="none" stroke="#b8893d" stroke-width="1.5" opacity="0.4"/>
+  
+  <!-- Top circle - Code/Development -->
+  <circle cx="100" cy="45" r="12" fill="#1d6fdb" opacity="0.9"/>
+  <text x="100" y="50" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Arial">{ }</text>
+  
+  <!-- Right circle - Build -->
+  <circle cx="145" cy="70" r="12" fill="#b8893d" opacity="0.9"/>
+  <text x="145" y="75" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Arial">⚙</text>
+  
+  <!-- Bottom right circle - Deploy -->
+  <circle cx="140" cy="130" r="12" fill="#1d6fdb" opacity="0.9"/>
+  <text x="140" y="136" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Arial">📦</text>
+  
+  <!-- Bottom left circle - Monitor -->
+  <circle cx="60" cy="130" r="12" fill="#b8893d" opacity="0.9"/>
+  <text x="60" y="136" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Arial">📊</text>
+  
+  <!-- Left circle - Infrastructure -->
+  <circle cx="55" cy="70" r="12" fill="#1d6fdb" opacity="0.9"/>
+  <text x="55" y="75" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Arial">☁</text>
+  
+  <!-- Central hub -->
+  <circle cx="100" cy="100" r="15" fill="#fff" opacity="0.15"/>
+  <circle cx="100" cy="100" r="8" fill="#b8893d"/>
+  <text x="100" y="105" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Arial">DevOps</text>
+  
+  <!-- Connecting lines -->
+  <line x1="100" y1="57" x2="135" y2="78" stroke="#1d6fdb" stroke-width="1.5" opacity="0.6"/>
+  <line x1="135" y1="78" x2="138" y2="118" stroke="#b8893d" stroke-width="1.5" opacity="0.6"/>
+  <line x1="138" y1="118" x2="62" y2="118" stroke="#1d6fdb" stroke-width="1.5" opacity="0.6"/>
+  <line x1="62" y1="118" x2="65" y2="78" stroke="#b8893d" stroke-width="1.5" opacity="0.6"/>
+  <line x1="65" y1="78" x2="100" y2="57" stroke="#1d6fdb" stroke-width="1.5" opacity="0.6"/>
+</svg>
