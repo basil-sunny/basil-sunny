@@ -59,7 +59,7 @@
         <div class="lbl">Challenge</div>
         <p>Jenkins-based builds with Capistrano deployments and AMI creation took 30+ minutes, creating a bottleneck that slowed feature releases.</p>
         <div class="lbl">Solution</div>
-        <p>Replaced the legacy pipeline with CircleCI for fast container image builds and Octopus Deploy with Helm for automated, reliable deployments to EKS in minutes.</p>
+        <p>Replaced the legacy pipeline with CircleCI (SaaS) for fast container image builds and Octopus Deploy (SaaS) with Helm for automated, reliable deployments to EKS in minutes.</p>
         <div class="lbl">Result</div>
         <p>Reduced deployment time from 30+ minutes to under 15 minutes, enabling multiple releases per day and significantly improving developer velocity.</p>
         <div class="stack"><span>YAML</span><span>CircleCI</span><span>Octopus Deploy</span><span>Terraform</span></div>
@@ -76,6 +76,18 @@
         <div class="lbl">Result</div>
         <p>Established central logging across all EKS clusters with Kubernetes-native keywords, tiered retention policies for production and non-production environments, and simplified troubleshooting for teams.</p>
         <div class="stack"><span>Fluentd</span><span>Elasticsearch</span><span>Kibana</span><span>Elastic Cloud</span><span>Terraform</span></div>
+      </div>
+
+      <div class="card problem reveal">
+        <span class="tag">Observability</span>
+        <h3>Unified metrics monitoring across clusters</h3>
+        <div class="lbl">Challenge</div>
+        <p>Metrics were scattered across multiple environments with no centralized visibility, making it difficult to correlate issues, track performance trends, or troubleshoot problems efficiently.</p>
+        <div class="lbl">Solution</div>
+        <p>Deployed Prometheus in agent mode with remote write to Amazon Managed Prometheus for scalable metric ingestion, and used Amazon Managed Grafana for monitoring dashboards.</p>
+        <div class="lbl">Result</div>
+        <p>Created a single pane of glass for all EKS clusters with cluster filtering and layered dashboards for Kubernetes API health, cluster overview, namespaces, pods, and nodes - enabling granular troubleshooting at any level.</p>
+        <div class="stack"><span>Prometheus</span><span>Amazon Managed Prometheus</span><span>Amazon Managed Grafana</span><span>Terraform</span></div>
       </div>
 
     </div>
