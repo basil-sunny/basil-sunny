@@ -104,6 +104,19 @@
         <div class="stack"><span>Amazon Managed RabbitMQ</span><span>CloudWatch</span><span>Terraform</span></div>
       </div>
 
+      <div class="card problem reveal">
+        <span class="tag">Security</span>
+        <span class="tag">Governance</span>
+        <h3>Centralized Helm repository for artifact distribution</h3>
+        <div class="lbl">Challenge</div>
+        <p>Kubernetes deployment artifacts were scattered without a centralized, versioned control mechanism, leading to deployment inconsistencies, difficult rollbacks, environment drift, and lack of governance over application delivery.</p>
+        <div class="lbl">Solution</div>
+        <p>Implemented a private Helm repository using Chartmuseum backed by S3, providing a secure, immutable, versioned distribution mechanism for all Kubernetes deployment artifacts with automated CI/CD integration.</p>
+        <div class="lbl">Result</div>
+        <p>Achieved reproducible deployments across all environments, faster releases and rollbacks, improved governance and auditability, reduced deployment failures caused by environment drift, and established a single source of truth for application delivery.</p>
+        <div class="stack"><span>Chartmuseum</span><span>S3</span><span>YAML</span><span>CircleCI</span><span>Terraform</span></div>
+      </div>
+
     </div>
   </div>
 </section>
