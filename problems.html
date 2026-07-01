@@ -129,6 +129,18 @@
         <div class="stack"><span>Keda</span><span>RabbitMQ</span><span>Kubernetes</span><span>Redis</span><span>Terraform</span></div>
       </div>
 
+      <div class="card problem reveal">
+        <span class="tag">Security</span>
+        <h3>Deterministic pod retirement mechanism</h3>
+        <div class="lbl">Challenge</div>
+        <p>Kubernetes doesn't guarantee which pods are terminated during scale-down events—the scheduler uses internal heuristics where pod age is not a deterministic factor. This caused problems like memory fragmentation, potential memory leaks persisting in long-lived pods, and security concerns around stale application state.</p>
+        <div class="lbl">Solution</div>
+        <p>Implemented a custom Kubernetes pod retirement mechanism that periodically identifies the oldest pods in selected deployments and assigns them a lower pod deletion cost, ensuring they are preferentially terminated during scale-down events.</p>
+        <div class="lbl">Result</div>
+        <p>Enabled deterministic retirement of aged pods, reduced the need for manual pod restarts and operational intervention, improved application stability by preventing memory accumulation, and enhanced security by ensuring stale pods don't persist longer than necessary.</p>
+        <div class="stack"><span>Bash</span><span>Kubernetes</span><span>Terraform</span></div>
+      </div>
+
     </div>
   </div>
 </section>
