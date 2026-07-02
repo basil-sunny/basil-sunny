@@ -207,9 +207,9 @@ const SKILLS = [
     }
 
     const el = document.createElement('div');
-    el.className = 'skillcat' + (i === 0 ? ' open' : '');
+    el.className = 'skillcat open';
     el.innerHTML = `
-      <button class="skillcat-head" aria-expanded="${i===0}">
+      <button class="skillcat-head" aria-expanded="true">
         <span class="skillcat-num">${num}</span>
         <span class="skillcat-ic">${cat.icon}</span>
         <span class="skillcat-tt"><h3>${esc(cat.title)}</h3><p>${esc(cat.sub)}</p></span>
