@@ -11,11 +11,6 @@
 <link rel="stylesheet" href="styles.css">
 <style>
 /* ===== Skills page — scoped additions (reuses global tokens) ===== */
-.skills-controls{display:flex;justify-content:flex-end;margin-bottom:18px}
-.skills-toggle{font-size:13px;font-weight:500;color:var(--slate-2);background:#fff;
-  border:1px solid var(--line-2);border-radius:7px;padding:8px 14px;cursor:pointer;transition:.18s}
-.skills-toggle:hover{border-color:var(--accent);color:var(--accent)}
-
 .skills-list{display:grid;gap:16px}
 
 .skillcat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
@@ -82,15 +77,12 @@
   <div class="wrap">
     <div class="eyebrow">Skills</div>
     <h1>Tools &amp; capabilities</h1>
-    <p class="sub">The platforms, tooling, and practices I work with day to day — organised by discipline. Select any category to expand the full breakdown.</p>
+    <p class="sub">The platforms, tooling, and practices I work with day to day — organised by discipline. </p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="skills-controls reveal">
-      <button class="skills-toggle" id="skillsToggle">Expand all</button>
-    </div>
     <div class="skills-list" id="skillsList"></div>
   </div>
 </section>
@@ -115,29 +107,30 @@ const SKILLS = [
   {
     icon:"🐧", title:"Operating Systems", sub:"Linux administration across enterprise and community distros",
     items:[
-      {name:"RHEL / Red Hat",lead:true},{name:"Debian",lead:true},{name:"Ubuntu"},
-      {name:"systemd"},{name:"Networking & firewall"},{name:"Package management (yum / apt)"},
+      {name:"Red Hat Enterprise Linux",lead:true},{name:"Debian",lead:true},{name:"Alpine Linux",lead:true},
+      {name:"Networking & firewall"},{name:"Package management (yum / apt / apk)"},
       {name:"Performance tuning"},{name:"Patching & hardening"}
     ]
   },
   {
     icon:"⌨️", title:"Scripting & Automation", sub:"Glue code and tooling that removes operational toil",
     items:[
-      {name:"Bash",lead:true},{name:"Python",lead:true},{name:"Shell automation"},
-      {name:"boto3 (AWS SDK)"},{name:"YAML / JSON"},{name:"Cron / scheduling"}
+      {name:"Bash",lead:true},{name:"Python",lead:true},{name:"Ruby",lead:true},{name:"YAML / JSON"}
     ]
   },
   {
     icon:"☁️", title:"Cloud Platforms", sub:"Designing and operating production cloud environments",
     groups:[
       {label:"AWS", badge:"Primary", badgeGold:true, chips:[
-        {name:"EC2",lead:true},{name:"EKS",lead:true},{name:"S3",lead:true},
-        {name:"VPC"},{name:"IAM"},{name:"RDS / Aurora"},{name:"Lambda"},{name:"CloudWatch"},
+        {name:"VPC",lead:true},{name:"EC2",lead:true},{name:"S3"},
+        {name:"EKS"},{name:"IAM"},{name:"RDS / Aurora"},{name:"Lambda"},{name:"CloudWatch"},
         {name:"Route 53"},{name:"ELB / ALB / NLB"},{name:"Auto Scaling"},{name:"CloudFront"},
-        {name:"EBS / EFS"},{name:"ECR"},{name:"Spot & cost optimisation"}
+        {name:"EBS / EFS"},{name:"ECR"},{name:"Amazon managed Prometheus"},{name:"Amazon managed Grafana"},{name:"DataPipeline"},
+        {name:"WAF v2"},{name:"DynamoDB"},{name:"Secrets Manager"},{name:"CloudTrail"},{name:"CloudFormation"},{name:"API Gateway"}, 
+        {name:"Amazon MQ"}, {name:"ElastiCache"}, {name:"CodeBuild"}, {name:"CodeDeploy"}, {name:"CodePipeline"}
       ]},
       {label:"GCP", badge:"Secondary", chips:[
-        {name:"GCE"},{name:"GKE"},{name:"Cloud Storage"},{name:"VPC"},
+        {name:"VPC",lead:true},{name:"GCE"},{name:"GKE"},{name:"Cloud Storage"},
         {name:"IAM"},{name:"Cloud Load Balancing"},{name:"Cloud Monitoring"}
       ]},
       {label:"On-prem / Other", badge:"", chips:[
@@ -149,8 +142,7 @@ const SKILLS = [
     icon:"📐", title:"Infrastructure as Code", sub:"Provisioning and configuration management",
     items:[
       {name:"Terraform",lead:true},{name:"CloudFormation",lead:true},{name:"Ansible",lead:true},
-      {name:"Terraform modules"},{name:"Remote state & backends"},
-      {name:"Ansible playbooks & roles"},{name:"GitOps workflows"}
+      {name:"GitOps workflows"}
     ]
   },
   {
@@ -164,10 +156,8 @@ const SKILLS = [
   {
     icon:"🔁", title:"CI / CD & Delivery", sub:"Build, test, and deployment pipelines",
     items:[
-      {name:"Jenkins",lead:true},{name:"Git",lead:true},{name:"CircleCI"},
-      {name:"Harness CI"},{name:"Octopus Deploy"},{name:"GitOps"},
-      {name:"Pipeline as code"},{name:"Release automation"}
-    ]
+      {name:"Git",lead:true},{name:"Jenkins",lead:true},{name:"CircleCI",lead:true},
+      {name:"Harness CI"},{name:"Octopus Deploy"},{name:"Gitlab CI/CD"}
   },
   {
     icon:"📊", title:"Observability & Monitoring", sub:"Metrics, logs, dashboards, and alerting",
@@ -181,15 +171,15 @@ const SKILLS = [
         {name:"Kibana"},{name:"Elastic Cloud"}
       ]},
       {label:"Alerting & On-call", badge:"", chips:[
-        {name:"Opsgenie",lead:true},{name:"Alertmanager"},{name:"Incident response & RCA"}
+        {name:"Opsgenie",lead:true},{name:"Alertmanager"}
       ]}
     ]
   },
   {
     icon:"🖥️", title:"Virtualization & Hosting", sub:"Hypervisors and server management",
     items:[
-      {name:"KVM",lead:true},{name:"XEN Hypervisor"},{name:"OpenVZ"},
-      {name:"cPanel"},{name:"VM provisioning"},{name:"Shared web servers"}
+      {name:"KVM",lead:true},{name:"XEN Hypervisor",lead:true},{name:"OpenVZ",lead:true},
+      {name:"cPanel"},{name:"Nginx"},{name:"Apache HTTP Server"}
     ]
   }
 ];
@@ -230,28 +220,9 @@ const SKILLS = [
     head.addEventListener('click', () => {
       const open = el.classList.toggle('open');
       head.setAttribute('aria-expanded', open);
-      syncToggle();
     });
     list.appendChild(el);
   });
-
-  // Expand / collapse all
-  const toggle = document.getElementById('skillsToggle');
-  function syncToggle(){
-    const cats = [...list.querySelectorAll('.skillcat')];
-    const allOpen = cats.every(c => c.classList.contains('open'));
-    toggle.textContent = allOpen ? 'Collapse all' : 'Expand all';
-  }
-  toggle.addEventListener('click', () => {
-    const cats = [...list.querySelectorAll('.skillcat')];
-    const allOpen = cats.every(c => c.classList.contains('open'));
-    cats.forEach(c => {
-      c.classList.toggle('open', !allOpen);
-      c.querySelector('.skillcat-head').setAttribute('aria-expanded', !allOpen);
-    });
-    syncToggle();
-  });
-  syncToggle();
 })();
 </script>
 </body>
