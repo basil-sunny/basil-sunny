@@ -173,11 +173,11 @@
         <span class="tag">Scaling</span>
         <h3>Dedicated pod subnets for EKS prefix delegation</h3>
         <div class="lbl">Challenge</div>
-        <p>In an EKS cluster with VPC CNI prefix delegation enabled, pods drew their IPs from the same shared subnets used to provision RDS, EFS, and EC2. Because prefix delegation reserves large contiguous /28 IP blocks per node, this contention caused subnet IP fragmentation and exhaustion - leading to vpc-cni failures and instability during node scaling.</p>
+        <p>In an EKS cluster with VPC CNI prefix delegation enabled, pods drew their IPs from the same shared subnets used to provision RDS, EFS, and EC2. Because prefix delegation reserves large contiguous /28 IP blocks per node, this contention caused subnet IP fragmentation and exhaustion leading to vpc-cni failures and instability during node scaling.</p>
         <div class="lbl">Solution</div>
         <p>Provisioned dedicated pod-only subnets (one per AZ, aligned with the node subnets) and configured custom networking so the VPC CNI allocates pod IPs exclusively from them. This isolated pod IP assignment from other AWS services, giving prefix delegation the contiguous address space it requires.</p>
         <div class="lbl">Result</div>
-        <p>Eliminated vpc-cni crashloops caused by IP exhaustion and delivered stable, predictable node scaling - while freeing the shared subnets for RDS, EFS, and EC2 without contention.</p>
+        <p>Eliminated vpc-cni crashloops caused by IP exhaustion and delivered stable, predictable node scaling while freeing the shared subnets for RDS, EFS, and EC2 without contention.</p>
         <div class="stack"><span>VPC</span><span>EKS</span><span>Terraform</span><span>Networking</span></div>
       </div>
 
