@@ -155,6 +155,32 @@
         <div class="stack"><span>Bash</span><span>Kubernetes</span><span>Terraform</span></div>
       </div>
 
+      <div class="card problem reveal">
+        <span class="tag">Reliability</span>
+        <span class="tag">Disaster Recovery</span>
+        <h3>Automated backup of GitHub organization repositories</h3>
+        <div class="lbl">Challenge</div>
+        <p>All source code and its full history lived solely on GitHub, creating a single point of failure. An outage, accidental deletion, force-push, or account compromise could result in permanent loss of critical code, with no independent recovery point.</p>
+        <div class="lbl">Solution</div>
+        <p>Built an automated backup pipeline using bash scripts that iterate through every repository in the organization, performing a full git clone mirror to capture all branches, tags, and refs. The backup is then uploaded to S3 for durable, versioned storage.</p>
+        <div class="lbl">Result</div>
+        <p>Established complete, restorable copies of all organization repositories stored independently of GitHub - preserving full git history, ensuring business continuity during provider outages, and eliminating single-point-of-failure risk.</p>
+        <div class="stack"><span>Bash</span><span>DataPipeline</span><span>Terraform</span><span>S3</span><span>GitHub API</span></div>
+      </div>
+
+      <div class="card problem reveal">
+        <span class="tag">Networking</span>
+        <span class="tag">Scaling</span>
+        <h3>Dedicated pod subnets for EKS prefix delegation</h3>
+        <div class="lbl">Challenge</div>
+        <p>In an EKS cluster with VPC CNI prefix delegation enabled, pods drew their IPs from the same shared subnets used to provision RDS, EFS, and EC2. Because prefix delegation reserves large contiguous /28 IP blocks per node, this contention caused subnet IP fragmentation and exhaustion - leading to vpc-cni failures and instability during node scaling.</p>
+        <div class="lbl">Solution</div>
+        <p>Provisioned dedicated pod-only subnets (one per AZ, aligned with the node subnets) and configured custom networking so the VPC CNI allocates pod IPs exclusively from them. This isolated pod IP assignment from other AWS services, giving prefix delegation the contiguous address space it requires.</p>
+        <div class="lbl">Result</div>
+        <p>Eliminated vpc-cni crashloops caused by IP exhaustion and delivered stable, predictable node scaling - while freeing the shared subnets for RDS, EFS, and EC2 without contention.</p>
+        <div class="stack"><span>VPC</span><span>EKS</span><span>Terraform</span><span>Networking</span></div>
+      </div>
+
     </div>
   </div>
 </section>
