@@ -83,6 +83,9 @@ section{padding:62px 0}
 .profile-card ul{list-style:none;margin-top:18px;border-top:1px solid var(--line);padding-top:16px;text-align:left;display:grid;gap:11px;font-size:13.5px}
 .profile-card li{display:flex;justify-content:space-between;color:var(--slate-2)}
 .profile-card li b{color:var(--ink);font-weight:500}
+.profile-card .certs{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+.profile-card .certs img{display:block;width:100px;height:100px;object-fit:contain;transition:.22s}
+.profile-card .certs a:hover img{transform:translateY(-2px)}
 
 /* ---------- TIMELINE ---------- */
 .timeline{position:relative;margin-left:6px}
